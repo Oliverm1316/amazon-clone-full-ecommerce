@@ -1,8 +1,8 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import "./Product.css";
 import { useStateValue } from "./StateProvider";
 
-const Product = ({ id, title, image, price, rating }) => {
+const Product = forwardRef(({ id, title, image, price, rating }, ref) => {
   const [{ basket }, dispatch] = useStateValue();
   console.log(basket);
   const addToBasket = () => {
@@ -19,7 +19,7 @@ const Product = ({ id, title, image, price, rating }) => {
     });
   };
   return (
-    <div className='product'>
+    <div ref={ref} className='product'>
       <div className='product__info'>
         <p>{title}</p>
         <p className='product__price'>
@@ -38,6 +38,6 @@ const Product = ({ id, title, image, price, rating }) => {
       <button onClick={addToBasket}>Add to Basket</button>
     </div>
   );
-};
+});
 
 export default Product;
